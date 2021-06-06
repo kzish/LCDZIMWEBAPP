@@ -14,8 +14,8 @@ namespace Admin.Models
             CaseReportParentsGuardiansSpousesInformation = new HashSet<CaseReportParentsGuardiansSpousesInformation>();
         }
 
-        public int Id { get; set; }
-        public DateTime Date { get; set; }
+        public string Id { get; set; }
+        public DateTime? Date { get; set; }
         public string ReferredByNameAndInstitution { get; set; }
         public string PoliceStation { get; set; }
         public string CrRef { get; set; }

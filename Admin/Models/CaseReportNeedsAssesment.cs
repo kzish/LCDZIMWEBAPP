@@ -5,8 +5,8 @@ namespace Admin.Models
 {
     public partial class CaseReportNeedsAssesment
     {
-        public int Id { get; set; }
-        public int CaseId { get; set; }
+        public string Id { get; set; }
+        public string CaseId { get; set; }
         public string WhereDoesTheBeneficiaryLive { get; set; }
         public string WhoIsTakingCareOfTheBeneficiary { get; set; }
         public string WhoIsTakingCareOfTheBeneficiaryOtherSpecify { get; set; }

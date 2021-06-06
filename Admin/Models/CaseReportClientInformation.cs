@@ -5,11 +5,11 @@ namespace Admin.Models
 {
     public partial class CaseReportClientInformation
     {
-        public int Id { get; set; }
-        public int CaseId { get; set; }
+        public string Id { get; set; }
+        public string CaseId { get; set; }
         public string NameOfClient { get; set; }
-        public DateTime Dob { get; set; }
-        public int Age { get; set; }
+        public DateTime? Dob { get; set; }
+        public int? Age { get; set; }
         public string Sex { get; set; }
         public string LevelOfEducation { get; set; }
         public string ClientsAddress { get; set; }

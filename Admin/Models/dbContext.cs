@@ -148,7 +148,11 @@ namespace Admin.Models
             {
                 entity.ToTable("case_report");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.CompiledBy)
                     .HasColumnName("compiled_by")
@@ -162,7 +166,7 @@ namespace Admin.Models
 
                 entity.Property(e => e.CrRef)
                     .HasColumnName("cr_ref")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
@@ -179,17 +183,17 @@ namespace Admin.Models
 
                 entity.Property(e => e.ForceNumber)
                     .HasColumnName("force_number")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MobileNumber)
                     .HasColumnName("mobile_number")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NameOfInvestigatingOfficer)
                     .HasColumnName("name_of_investigating_officer")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PoliceStation)
@@ -207,15 +211,22 @@ namespace Admin.Models
             {
                 entity.ToTable("case_report.client_information");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Age).HasColumnName("age");
 
-                entity.Property(e => e.CaseId).HasColumnName("case_id");
+                entity.Property(e => e.CaseId)
+                    .IsRequired()
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ClientsAddress)
                     .HasColumnName("clients_address")
-                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.DescriptionOfDisability)
@@ -238,18 +249,17 @@ namespace Admin.Models
 
                 entity.Property(e => e.Mobile)
                     .HasColumnName("mobile")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NameOfClient)
-                    .IsRequired()
                     .HasColumnName("name_of_client")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PhoneNumberHome)
                     .HasColumnName("phone_number_home")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Sex)
@@ -267,7 +277,11 @@ namespace Admin.Models
             {
                 entity.ToTable("case_report.description_of_the_case_problem");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.BeneficiaryStatus)
                     .HasColumnName("beneficiary_status")
@@ -278,7 +292,11 @@ namespace Admin.Models
                     .HasColumnName("beneficiary_status_other_specify")
                     .IsUnicode(false);
 
-                entity.Property(e => e.CaseId).HasColumnName("case_id");
+                entity.Property(e => e.CaseId)
+                    .IsRequired()
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.DetailsOfCaseAndCharge)
                     .HasColumnName("details_of_case_and_charge")
@@ -318,7 +336,11 @@ namespace Admin.Models
             {
                 entity.ToTable("case_report.needs_assesment");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.BeneficiaryImmediateConcerns)
                     .HasColumnName("beneficiary_immediate_concerns")
@@ -333,7 +355,11 @@ namespace Admin.Models
                     .HasColumnName("beneficiary_well_being_at_the_point_of_intake_other_specify")
                     .IsUnicode(false);
 
-                entity.Property(e => e.CaseId).HasColumnName("case_id");
+                entity.Property(e => e.CaseId)
+                    .IsRequired()
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.HowManyPeopleLiveWithTheBeneficiary).HasColumnName("how_many_people_live_with_the_beneficiary");
 
@@ -381,7 +407,11 @@ namespace Admin.Models
             {
                 entity.ToTable("case_report.next_of_kin");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Address)
                     .HasColumnName("address")
@@ -389,32 +419,35 @@ namespace Admin.Models
 
                 entity.Property(e => e.Age).HasColumnName("age");
 
-                entity.Property(e => e.CaseId).HasColumnName("case_id");
+                entity.Property(e => e.CaseId)
+                    .IsRequired()
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Employer)
                     .HasColumnName("employer")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
-                    .IsRequired()
                     .HasColumnName("name")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Occupation)
                     .HasColumnName("occupation")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PhoneNumber)
                     .HasColumnName("phone_number")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Case)
@@ -427,7 +460,11 @@ namespace Admin.Models
             {
                 entity.ToTable("case_report.parents_guardians_spouses_information");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Address)
                     .HasColumnName("address")
@@ -435,16 +472,20 @@ namespace Admin.Models
 
                 entity.Property(e => e.Age).HasColumnName("age");
 
-                entity.Property(e => e.CaseId).HasColumnName("case_id");
+                entity.Property(e => e.CaseId)
+                    .IsRequired()
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Employer)
                     .HasColumnName("employer")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MaritalStatus)
@@ -452,20 +493,23 @@ namespace Admin.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.MaritalStatusOtherSpecify)
+                    .HasColumnName("marital_status_other_specify")
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Name)
-                    .IsRequired()
                     .HasColumnName("name")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Occupation)
                     .HasColumnName("occupation")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PhoneNumber)
                     .HasColumnName("phone_number")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Case)
