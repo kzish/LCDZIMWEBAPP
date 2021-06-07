@@ -15,6 +15,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+
 namespace Admin
 {
     public class Startup
@@ -46,10 +48,10 @@ namespace Admin
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme,
-            opt =>
-            {
-                opt.LoginPath = "/Auth/Login";
-            });
+           opt =>
+           {
+               opt.LoginPath = "/Auth/Login";
+           });
 
             //for tempdata
             services.Configure<CookieTempDataProviderOptions>(options => {

@@ -1,0 +1,248 @@
+﻿@{ Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var caseReport = (Admin.Models.CaseReport)ViewBag.caseReport;
+    var caseReportClientInformation = (Admin.Models.CaseReportClientInformation)ViewBag.caseReportClientInformation;
+    var caseReportDescriptionOfTheCaseProblem = (Admin.Models.CaseReportDescriptionOfTheCaseProblem)ViewBag.caseReportDescriptionOfTheCaseProblem;
+    var caseReportNeedsAssesment = (Admin.Models.CaseReportNeedsAssesment)ViewBag.caseReportNeedsAssesment;
+    var caseReportNextOfKin = (Admin.Models.CaseReportNextOfKin)ViewBag.caseReportNextOfKin;
+    var caseReportParentsGuardiansSpousesInformation = (Admin.Models.CaseReportParentsGuardiansSpousesInformation)ViewBag.caseReportParentsGuardiansSpousesInformation; }
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/CaseReports/CreateUpDateCaseReport" method="post">
+
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#1">Basic Information</a></li>
+                    <li><a data-toggle="tab" href="#2">Client Information</a></li>
+                    <li><a data-toggle="tab" href="#3">P/G/S Information</a></li>
+                    <li><a data-toggle="tab" href="#4">Next of Kin</a></li>
+                    <li><a data-toggle="tab" href="#5">Description of Case</a></li>
+                    <li><a data-toggle="tab" href="#6">Needs Assesment</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="1" class="tab-pane fade in active">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Refered by (Name and Institution)</label>
+                                    <input type="text" class="form-control" name="ReferredByNameAndInstitution" value="@caseReport.ReferredByNameAndInstitution">
+                                </div>
+                                <div class="form-group">
+                                    <label>Police Station</label>
+                                    <input type="text" class="form-control" name="PoliceStation" value="@caseReport.PoliceStation">
+                                </div>
+                                <div class="form-group">
+                                    <label>CrRef</label>
+                                    <input type="text" class="form-control" name="CrRef" value="@caseReport.CrRef">
+                                </div>
+                                <div class="form-group">
+                                    <label>Name Of Investigating Officer</label>
+                                    <input type="text" class="form-control" name="NameOfInvestigatingOfficer" value="@caseReport.NameOfInvestigatingOfficer">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mobile Number</label>
+                                    <input type="text" class="form-control" name="MobileNumber" value="@caseReport.MobileNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label>Court Handling the Case</label>
+                                    <input type="text" class="form-control" name="CourtHandlingTheCase" value="@caseReport.CourtHandlingTheCase">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date Case was reported</label>
+                                    <input type="date" class="form-control" name="DateCaseWasReported" value="@caseReport.DateCaseWasReported?.ToString("yyyy-MM-dd")">
+                                </div>
+                                <div class="form-group">
+                                    <label>Compiled By</label>
+                                    <input type="text" class="form-control" name="CompiledBy" value="@caseReport.CompiledBy">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date Compiled</label>
+                                    <input type="date" class="form-control" name="DateCompiled" value="@caseReport.DateCompiled?.ToString("yyyy-MM-dd")">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="2" class="tab-pane fade">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Name of Client</label>
+                                    <input type="text" class="form-control" name="caseReportClientInformation.NameOfClient" value="@caseReportClientInformation.NameOfClient">
+                                </div>
+                                <div class="form-group">
+                                    <label>Dob</label>
+                                    <input type="date" class="form-control" name="caseReportClientInformation.Dob" value="@caseReportClientInformation.Dob?.ToString("yyyy-MM-dd")">
+                                </div>
+                                <div class="form-group">
+                                    <label>Age</label>
+                                    <input type="number" step="1" min="0" class="form-control" name="caseReportClientInformation.Age" value="@caseReportClientInformation.Age">
+                                </div>
+                                <div class="form-group">
+                                    <label>Sex</label>
+                                    <select class="form-control" name="caseReportClientInformation.Sex">
+                                        <option value="Male" @(caseReportClientInformation.Sex.ToLower() == "male" ? "selected" : "")>Male</option>
+                                        <option value="female" @(caseReportClientInformation.Sex.ToLower() == "female" ? "selected" : "")>Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Level of Education</label>
+                                    <select class="form-control" name="caseReportClientInformation.LevelOfEducation">
+                                        <option value="Male" @(caseReportClientInformation.LevelOfEducation.ToLower() == "never been to school" ? "selected" : "")>Never Been to School</option>
+                                        <option value="female" @(caseReportClientInformation.LevelOfEducation.ToLower() == "primary" ? "selected" : "")>Primary</option>
+                                        <option value="female" @(caseReportClientInformation.LevelOfEducation.ToLower() == "secondary" ? "selected" : "")>Secondary</option>
+                                        <option value="female" @(caseReportClientInformation.LevelOfEducation.ToLower() == "tertiary" ? "selected" : "")>Tertiary</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Client's Address</label>
+                                    <textarea class="form-control" rows="5" name="caseReportClientInformation.ClientsAddress">@caseReportClientInformation.ClientsAddress</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number (Home)</label>
+                                    <input type="text" class="form-control" name="caseReportClientInformation.PhoneNumberHome" value="@caseReportClientInformation.PhoneNumberHome">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mobile</label>
+                                    <input type="text" class="form-control" name="caseReportClientInformation.Mobile" value="@caseReportClientInformation.Mobile">
+                                </div>
+                                <div class="form-group">
+                                    <label>Desription of the disability</label>
+                                    <table>
+                                        <tr>
+                                            <td>Hi</td>
+                                            <td><input type="checkbox" value="hi" @(caseReportClientInformation.DescriptionOfDisability.Contains("hi") ? "checked" : "") /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vi</td>
+                                            <td><input type="checkbox" value="vi" @(caseReportClientInformation.DescriptionOfDisability.Contains("vi") ? "checked" : "") /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mr</td>
+                                            <td><input type="checkbox" value="mr" @(caseReportClientInformation.DescriptionOfDisability.Contains("mr") ? "checked" : "") /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cosmetic</td>
+                                            <td><input type="checkbox" value="cosmetic" @(caseReportClientInformation.DescriptionOfDisability.Contains("cosmetic") ? "checked" : "") /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Physical</td>
+                                            <td><input type="checkbox" value="physical" @(caseReportClientInformation.DescriptionOfDisability.Contains("physical") ? "checked" : "") /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="form-group">
+                                    <label>Give Details of the disability</label>
+                                    <textarea class="form-control" rows="5" name="caseReportClientInformation.GiveDetailsOfTheDisability">@caseReportClientInformation.GiveDetailsOfTheDisability</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="3" class="tab-pane fade">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="caseReportParentsGuardiansSpousesInformation.Name" value="@caseReportParentsGuardiansSpousesInformation.Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Age</label>
+                                    <input type="number" step="1" min="0" class="form-control" name="caseReportParentsGuardiansSpousesInformation.Age" value="@caseReportParentsGuardiansSpousesInformation.Age">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea class="form-control" rows="5" name="caseReportParentsGuardiansSpousesInformation.Address">@caseReportParentsGuardiansSpousesInformation.Address</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone number</label>
+                                    <input type="number" step="1" min="0" class="form-control" name="caseReportParentsGuardiansSpousesInformation.Age" value="@caseReportParentsGuardiansSpousesInformation.Age">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="caseReportParentsGuardiansSpousesInformation.Email" value="@caseReportParentsGuardiansSpousesInformation.Email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Occupation</label>
+                                    <input type="text" class="form-control" name="caseReportParentsGuardiansSpousesInformation.Occupation" value="@caseReportParentsGuardiansSpousesInformation.Occupation">
+                                </div>
+                                <div class="form-group">
+                                    <label>Employer</label>
+                                    <input type="text" class="form-control" name="caseReportParentsGuardiansSpousesInformation.Employer" value="@caseReportParentsGuardiansSpousesInformation.Employer">
+                                </div>
+                                <div class="form-group">
+                                    <label>Marital Status</label>
+                                    <select class="form-control" name="caseReportClientInformation.LevelOfEducation">
+                                        <option value="Married" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "married" ? "selected" : "")>Married</option>
+                                        <option value="Divorced" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "divorced" ? "selected" : "")>Divorced</option>
+                                        <option value="Widowed" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "widowed" ? "selected" : "")>Widowed</option>
+                                        <option value="Seperated" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "seperated" ? "selected" : "")>Seperated</option>
+                                        <option value="Other" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "other" ? "selected" : "")>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Other Marital Status</label>
+                                    <textarea class="form-control" rows="5" name="caseReportParentsGuardiansSpousesInformation.MaritalStatusOtherSpecify">@caseReportParentsGuardiansSpousesInformation.MaritalStatusOtherSpecify</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="4" class="tab-pane fade">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="caseReportNextOfKin.Name" value="@caseReportNextOfKin.Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Police Station</label>
+                                    <input type="number" step="1" min="0" class="form-control" name="caseReportNextOfKin.Age" value="@caseReportNextOfKin.Age">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea class="form-control" rows="5">@caseReportNextOfKin.Address</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" class="form-control" name="caseReportNextOfKin.PhoneNumber" value="@caseReportNextOfKin.PhoneNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="caseReportNextOfKin.Email" value="@caseReportNextOfKin.Email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Occupation</label>
+                                    <input type="text" class="form-control" name="caseReportNextOfKin.Occupation" value="@caseReportNextOfKin.Occupation">
+                                </div>
+                                <div class="form-group">
+                                    <label>Employer</label>
+                                    <input type="text" class="form-control" name="caseReportNextOfKin.Employer" value="@caseReportNextOfKin.Employer">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="5" class="tab-pane fade">
+                        tab 5
+                    </div>
+                    <div id="6" class="tab-pane fade">
+                        tab 6
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

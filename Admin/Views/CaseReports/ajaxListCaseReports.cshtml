@@ -1,0 +1,83 @@
+﻿@{
+    var case_reports = (List<Admin.Models.CaseReport>)ViewBag.case_reports;
+}
+<style>
+    @*style the drop down select entries - datatables*@
+    .custom-select
+    {
+        height:30px!important;
+        width:50px!important;
+        margin-left:5px!important;
+    }
+    @*style the copy buttons- datatables*@
+    .dt-buttons
+    {
+        margin-left:4px!important;
+    }
+</style>
+
+<table id="dt" class="table tblsm">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Referer/Institution</th>
+            <th>Police Station</th>
+            <th>C.R Ref</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in case_reports)
+        {
+            <tr>
+                <td title="@item.Date?.ToString("yyyy-MM-dd")">@item.Date?.ToString("yyyy-MM-dd")</td>
+                <td title="@item.ReferredByNameAndInstitution">@item.ReferredByNameAndInstitution</td>
+                <td title="@item.PoliceStation">@item.PoliceStation</td>
+                <td title="@item.CrRef">@item.CrRef</td>
+                <td>
+                    <a href="~/CaseReports/EditCaseReport/@item.Id" style="color:blue;">
+                        Edit
+                    </a>
+                    |
+                    <a href="javascript:void(0);" style="color:red;" onclick="confirm_delete('@item.Id')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+    $('#dt').DataTable({
+        select: true,
+        responsive: true,
+        dom: 'lBfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+
+    function confirm_delete(id) {
+        $.confirm({
+            title: 'Information',
+            type: "red",
+            content: 'Delete this CaseReport?',
+            buttons: {
+                Yes: function () {
+                    window.location = "../CaseReports/DeleteCaseReport/" + id;
+                },
+                No: function () {
+                },
+
+            }
+        });
+
+    }
+
+</script>

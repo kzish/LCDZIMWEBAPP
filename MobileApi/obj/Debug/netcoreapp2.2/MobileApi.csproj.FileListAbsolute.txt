@@ -7,6 +7,7 @@ C:\.NetProjects\LCDZIMWEPAPP\MobileApi\bin\Debug\netcoreapp2.2\MobileApi.dll
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\bin\Debug\netcoreapp2.2\MobileApi.pdb
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\bin\Debug\netcoreapp2.2\MobileApi.Views.dll
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\bin\Debug\netcoreapp2.2\MobileApi.Views.pdb
+C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.csproj.AssemblyReference.cache
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.AssemblyInfoInputs.cache
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.AssemblyInfo.cs
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.csproj.CoreCompileInputs.cache
@@ -32,4 +33,3 @@ C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.dll
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.pdb
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.genruntimeconfig.cache
 C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.csproj.CopyComplete
-C:\.NetProjects\LCDZIMWEPAPP\MobileApi\obj\Debug\netcoreapp2.2\MobileApi.csproj.AssemblyReference.cache
