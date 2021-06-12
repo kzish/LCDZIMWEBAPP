@@ -39,6 +39,7 @@ namespace MobileApi.Controllers
            string __caseReportDescriptionOfTheCaseProblem,
            string __caseReportNeedsAssesment,
            string __caseReportNextOfKin,
+           string __caseReportCareGiver,
            string __caseReportParentsGuardiansSpousesInformation
            )
         {
@@ -47,7 +48,9 @@ namespace MobileApi.Controllers
             _logger.LogInformation("__caseReportDescriptionOfTheCaseProblem: " + __caseReportDescriptionOfTheCaseProblem);
             _logger.LogInformation("__caseReportNeedsAssesment: " + __caseReportNeedsAssesment);
             _logger.LogInformation("__caseReportNextOfKin: " + __caseReportNextOfKin);
+            _logger.LogInformation("__caseReportCareGiver: " + __caseReportCareGiver);
             _logger.LogInformation("__caseReportParentsGuardiansSpousesInformation: " + __caseReportParentsGuardiansSpousesInformation);
+
             try
             {
                 CaseReport _caseReport = JsonConvert.DeserializeObject<CaseReport>(__caseReport);
@@ -55,6 +58,7 @@ namespace MobileApi.Controllers
                 CaseReportDescriptionOfTheCaseProblem _caseReportDescriptionOfTheCaseProblem = JsonConvert.DeserializeObject<CaseReportDescriptionOfTheCaseProblem>(__caseReportDescriptionOfTheCaseProblem);
                 CaseReportNeedsAssesment _caseReportNeedsAssesment = JsonConvert.DeserializeObject<CaseReportNeedsAssesment>(__caseReportNeedsAssesment);
                 CaseReportNextOfKin _caseReportNextOfKin = JsonConvert.DeserializeObject<CaseReportNextOfKin>(__caseReportNextOfKin);
+                CareReportCareGiver _caseReportCareGiver = JsonConvert.DeserializeObject<CareReportCareGiver>(__caseReportCareGiver);
                 CaseReportParentsGuardiansSpousesInformation _caseReportParentsGuardiansSpousesInformation = JsonConvert.DeserializeObject<CaseReportParentsGuardiansSpousesInformation>(__caseReportParentsGuardiansSpousesInformation);
 
 
@@ -110,6 +114,16 @@ namespace MobileApi.Controllers
                         else
                         {
                             db.Entry(_caseReportNextOfKin).State = EntityState.Modified;
+                        }
+                        //
+                        var careReportCareGiver = db.CareReportCareGiver.Where(i => i.Id == _caseReportCareGiver.Id).Any();
+                        if (!careReportCareGiver)
+                        {
+                            db.CareReportCareGiver.Add(_caseReportCareGiver);
+                        }
+                        else
+                        {
+                            db.Entry(_caseReportCareGiver).State = EntityState.Modified;
                         }
                         //
                         var caseReportParentsGuardiansSpousesInformation = db.CaseReportParentsGuardiansSpousesInformation.Where(i => i.Id == _caseReportParentsGuardiansSpousesInformation.Id).Any();

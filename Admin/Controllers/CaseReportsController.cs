@@ -225,6 +225,7 @@ namespace Admin.Controllers
             var caseReportDescriptionOfTheCaseProblem = db.CaseReportDescriptionOfTheCaseProblem.Where(i => i.CaseId == id).FirstOrDefault();
             var caseReportNeedsAssesment = db.CaseReportNeedsAssesment.Where(i => i.CaseId == id).FirstOrDefault();
             var caseReportNextOfKin = db.CaseReportNextOfKin.Where(i => i.CaseId == id).FirstOrDefault();
+            var careReportCareGiver = db.CareReportCareGiver.Where(i => i.CaseId == id).FirstOrDefault();
             var caseReportParentsGuardiansSpousesInformation = db.CaseReportParentsGuardiansSpousesInformation.Where(i => i.CaseId == id).FirstOrDefault();
 
             ViewBag.caseReport = caseReport;
@@ -232,6 +233,7 @@ namespace Admin.Controllers
             ViewBag.caseReportClientInformation = caseReportClientInformation;
             ViewBag.caseReportNeedsAssesment = caseReportNeedsAssesment;
             ViewBag.caseReportNextOfKin = caseReportNextOfKin;
+            ViewBag.careReportCareGiver = careReportCareGiver;
             ViewBag.caseReportParentsGuardiansSpousesInformation = caseReportParentsGuardiansSpousesInformation;
 
             return View("CreateCaseReport");

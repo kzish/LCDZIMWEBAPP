@@ -22,6 +22,7 @@ namespace Admin.Models
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<CareReportCareGiver> CareReportCareGiver { get; set; }
         public virtual DbSet<CaseReport> CaseReport { get; set; }
         public virtual DbSet<CaseReportClientInformation> CaseReportClientInformation { get; set; }
         public virtual DbSet<CaseReportDescriptionOfTheCaseProblem> CaseReportDescriptionOfTheCaseProblem { get; set; }
@@ -144,6 +145,45 @@ namespace Admin.Models
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
+            modelBuilder.Entity<CareReportCareGiver>(entity =>
+            {
+                entity.ToTable("care_report.care_giver");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.CareGiverAddress)
+                    .HasColumnName("care_giver_address")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CareGiverDob)
+                    .HasColumnName("care_giver_dob")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.CareGiverName)
+                    .HasColumnName("care_giver_name")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CareGiverPhoneNumber)
+                    .HasColumnName("care_giver_phone_number")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CareGiverSex)
+                    .HasColumnName("care_giver_sex")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CaseId)
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<CaseReport>(entity =>
             {
                 entity.ToTable("case_report");
@@ -153,6 +193,11 @@ namespace Admin.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.CaseNumber)
+                    .HasColumnName("case_number")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.CompiledBy)
                     .HasColumnName("compiled_by")

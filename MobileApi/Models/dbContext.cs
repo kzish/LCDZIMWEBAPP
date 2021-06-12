@@ -22,9 +22,11 @@ namespace MobileApi.Models
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<CareReportCareGiver> CareReportCareGiver { get; set; }
         public virtual DbSet<CaseReport> CaseReport { get; set; }
         public virtual DbSet<CaseReportClientInformation> CaseReportClientInformation { get; set; }
         public virtual DbSet<CaseReportDescriptionOfTheCaseProblem> CaseReportDescriptionOfTheCaseProblem { get; set; }
+        public virtual DbSet<CaseReportJustificationReportForAttendedCases> CaseReportJustificationReportForAttendedCases { get; set; }
         public virtual DbSet<CaseReportNeedsAssesment> CaseReportNeedsAssesment { get; set; }
         public virtual DbSet<CaseReportNextOfKin> CaseReportNextOfKin { get; set; }
         public virtual DbSet<CaseReportParentsGuardiansSpousesInformation> CaseReportParentsGuardiansSpousesInformation { get; set; }
@@ -34,8 +36,7 @@ namespace MobileApi.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("server=localhost;database=LCDZIM;User Id=sa;Password=123abc!;")
-                    .EnableSensitiveDataLogging();
+                optionsBuilder.UseSqlServer("server=localhost;database=LCDZIM;User Id=sa;Password=123abc!;");
             }
         }
 
@@ -145,6 +146,45 @@ namespace MobileApi.Models
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
+            modelBuilder.Entity<CareReportCareGiver>(entity =>
+            {
+                entity.ToTable("care_report.care_giver");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.CareGiverAddress)
+                    .HasColumnName("care_giver_address")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CareGiverDob)
+                    .HasColumnName("care_giver_dob")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.CareGiverName)
+                    .HasColumnName("care_giver_name")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CareGiverPhoneNumber)
+                    .HasColumnName("care_giver_phone_number")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CareGiverSex)
+                    .HasColumnName("care_giver_sex")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CaseId)
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<CaseReport>(entity =>
             {
                 entity.ToTable("case_report");
@@ -154,6 +194,11 @@ namespace MobileApi.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.CaseNumber)
+                    .HasColumnName("case_number")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.CompiledBy)
                     .HasColumnName("compiled_by")
@@ -167,7 +212,7 @@ namespace MobileApi.Models
 
                 entity.Property(e => e.CrRef)
                     .HasColumnName("cr_ref")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
@@ -184,17 +229,17 @@ namespace MobileApi.Models
 
                 entity.Property(e => e.ForceNumber)
                     .HasColumnName("force_number")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MobileNumber)
                     .HasColumnName("mobile_number")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NameOfInvestigatingOfficer)
                     .HasColumnName("name_of_investigating_officer")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PoliceStation)
@@ -228,7 +273,6 @@ namespace MobileApi.Models
 
                 entity.Property(e => e.ClientsAddress)
                     .HasColumnName("clients_address")
-                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.DescriptionOfDisability)
@@ -251,17 +295,17 @@ namespace MobileApi.Models
 
                 entity.Property(e => e.Mobile)
                     .HasColumnName("mobile")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NameOfClient)
                     .HasColumnName("name_of_client")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PhoneNumberHome)
                     .HasColumnName("phone_number_home")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Sex)
@@ -332,6 +376,77 @@ namespace MobileApi.Models
                     .WithMany(p => p.CaseReportDescriptionOfTheCaseProblem)
                     .HasForeignKey(d => d.CaseId)
                     .HasConstraintName("FK_case_report.description_of_the_case_problem_case_report");
+            });
+
+            modelBuilder.Entity<CaseReportJustificationReportForAttendedCases>(entity =>
+            {
+                entity.ToTable("case_report.justification_report_for_attended_cases");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ApprovedBy)
+                    .HasColumnName("approved_by")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApprovedByDate)
+                    .HasColumnName("approved_by_date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.CaseId)
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateOfCourtHearing)
+                    .HasColumnName("date_of_court_hearing")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.DateWhenTheBeneficiaryWasAssisted)
+                    .HasColumnName("date_when_the_beneficiary_was_assisted")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.NameOfBeneficiary)
+                    .HasColumnName("name_of_beneficiary")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Outcome)
+                    .HasColumnName("outcome")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PlaceOfActivity)
+                    .HasColumnName("place_of_activity")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PlaceOfOriginResidence)
+                    .HasColumnName("place_of_origin_residence")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PreparedBy)
+                    .HasColumnName("prepared_by")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PreparedByDate)
+                    .HasColumnName("prepared_by_date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.SummaryOfActivity)
+                    .HasColumnName("summary_of_activity")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TypeOfAssistanceDisabilityExpert).HasColumnName("type_of_assistance_disability_expert");
+
+                entity.Property(e => e.TypeOfAssistanceHomeVisit).HasColumnName("type_of_assistance_home_visit");
+
+                entity.Property(e => e.TypeOfAssistanceLogisticalSupport).HasColumnName("type_of_assistance_logistical_support");
             });
 
             modelBuilder.Entity<CaseReportNeedsAssesment>(entity =>
@@ -429,12 +544,12 @@ namespace MobileApi.Models
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Employer)
                     .HasColumnName("employer")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
@@ -444,12 +559,12 @@ namespace MobileApi.Models
 
                 entity.Property(e => e.Occupation)
                     .HasColumnName("occupation")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PhoneNumber)
                     .HasColumnName("phone_number")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Case)
@@ -482,12 +597,12 @@ namespace MobileApi.Models
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Employer)
                     .HasColumnName("employer")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MaritalStatus)
@@ -501,17 +616,17 @@ namespace MobileApi.Models
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Occupation)
                     .HasColumnName("occupation")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PhoneNumber)
                     .HasColumnName("phone_number")
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Case)

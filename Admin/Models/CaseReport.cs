@@ -16,6 +16,7 @@ namespace Admin.Models
 
         public string Id { get; set; }
         public DateTime? Date { get; set; }
+        public string CaseNumber { get; set; }
         public string ReferredByNameAndInstitution { get; set; }
         public string PoliceStation { get; set; }
         public string CrRef { get; set; }

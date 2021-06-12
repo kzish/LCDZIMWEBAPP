@@ -4,6 +4,7 @@
     var caseReportDescriptionOfTheCaseProblem = (Admin.Models.CaseReportDescriptionOfTheCaseProblem)ViewBag.caseReportDescriptionOfTheCaseProblem;
     var caseReportNeedsAssesment = (Admin.Models.CaseReportNeedsAssesment)ViewBag.caseReportNeedsAssesment;
     var caseReportNextOfKin = (Admin.Models.CaseReportNextOfKin)ViewBag.caseReportNextOfKin;
+    var careReportCareGiver = (Admin.Models.CareReportCareGiver)ViewBag.careReportCareGiver;
     var caseReportParentsGuardiansSpousesInformation = (Admin.Models.CaseReportParentsGuardiansSpousesInformation)ViewBag.caseReportParentsGuardiansSpousesInformation; }
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -21,8 +22,9 @@
                     <li><a data-toggle="tab" href="#2">Client Information</a></li>
                     <li><a data-toggle="tab" href="#3">P/G/S Information</a></li>
                     <li><a data-toggle="tab" href="#4">Next of Kin</a></li>
-                    <li><a data-toggle="tab" href="#5">Description of Case</a></li>
-                    <li><a data-toggle="tab" href="#6">Needs Assesment</a></li>
+                    <li><a data-toggle="tab" href="#5">Care Giver Information</a></li>
+                    <li><a data-toggle="tab" href="#6">Description of Case</a></li>
+                    <li><a data-toggle="tab" href="#7">Needs Assesment</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -30,6 +32,10 @@
                         <br />
                         <div class="row">
                             <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Case Number</label>
+                                    <input type="text" class="form-control" name="CaseNumber" value="@caseReport.CaseNumber">
+                                </div>
                                 <div class="form-group">
                                     <label>Refered by (Name and Institution)</label>
                                     <input type="text" class="form-control" name="ReferredByNameAndInstitution" value="@caseReport.ReferredByNameAndInstitution">
@@ -234,10 +240,159 @@
 
                     </div>
                     <div id="5" class="tab-pane fade">
-                        tab 5
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="careReportCareGiver.CareGiverName" value="@careReportCareGiver.CareGiverName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Police Station</label>
+                                    <input type="date" class="form-control" name="careReportCareGiver.CareGiverDob" value="@careReportCareGiver.CareGiverDob?.ToString("yyyy-MM-dd")">
+                                </div>
+                                <div class="form-group">
+                                    <label>Care Giver Sex</label>
+                                    <select class="form-control" name="careReportCareGiver.CareGiverSex">
+                                        <option value="Male" @(careReportCareGiver.CareGiverSex == "Male" ? "selected" : "")>Male</option>
+                                        <option value="Female" @(careReportCareGiver.CareGiverSex == "Female" ? "selected" : "")>Female</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" class="form-control" name="careReportCareGiver.CareGiverPhoneNumber" value="@careReportCareGiver.CareGiverPhoneNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <textarea class="form-control" name="careReportCareGiver.CareGiverAddress" rows="5">@careReportCareGiver.CareGiverAddress</textarea>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div id="6" class="tab-pane fade">
-                        tab 6
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Whats the status of the beneficiary in the matter/case</label>
+                                    <select class="form-control" name="caseReportDescriptionOfTheCaseProblem.BeneficiaryStatus">
+                                        <option value="Survivor/Victim/Complainant" @(caseReportDescriptionOfTheCaseProblem.BeneficiaryStatus == "Survivor/Victim/Complainant" ? "selected" : "")>Survivor/Victim/Complainant</option>
+                                        <option value="Witness" @(caseReportDescriptionOfTheCaseProblem.BeneficiaryStatus == "Witness" ? "selected" : "")>Witness</option>
+                                        <option value="Accussed" @(caseReportDescriptionOfTheCaseProblem.BeneficiaryStatus == "Accussed" ? "selected" : "")>Accussed</option>
+                                        <option value="Other" @(caseReportDescriptionOfTheCaseProblem.BeneficiaryStatus == "Other" ? "selected" : "")>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Other Specify</label>
+                                    <textarea class="form-control" name="caseReportDescriptionOfTheCaseProblem.BeneficiaryStatusOtherSpecify" rows="5">@caseReportDescriptionOfTheCaseProblem.BeneficiaryStatusOtherSpecify</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>What is the relationship between the client/beneficiary and</label>
+                                    <br />Accussed:<input type="text" class="form-control" name="caseReportDescriptionOfTheCaseProblem.RelationshipClientAndAccused" value="@caseReportDescriptionOfTheCaseProblem.RelationshipClientAndAccused">
+                                    <br />Witness:<input type="text" class="form-control" name="caseReportDescriptionOfTheCaseProblem.RelationshipClientAndWitness" value="@caseReportDescriptionOfTheCaseProblem.RelationshipClientAndWitness">
+                                    <br />Survivor/Victim/Complainant:<input type="text" class="form-control" name="caseReportDescriptionOfTheCaseProblem.RelationshipClientAndSurvivorVictimComplainant" value="@caseReportDescriptionOfTheCaseProblem.RelationshipClientAndSurvivorVictimComplainant">
+                                </div>
+                                <div class="form-group">
+                                    <label>Nature of the matter/case</label>
+                                    <select class="form-control" name="caseReportDescriptionOfTheCaseProblem.NatureOfTheMatterCase">
+                                        <option value="Criminal" @(caseReportDescriptionOfTheCaseProblem.NatureOfTheMatterCase == "Criminal" ? "selected" : "")>Criminal</option>
+                                        <option value="Civil" @(caseReportDescriptionOfTheCaseProblem.NatureOfTheMatterCase == "Civil" ? "selected" : "")>Civil</option>
+                                        <option value="Other" @(caseReportDescriptionOfTheCaseProblem.NatureOfTheMatterCase == "Other" ? "selected" : "")>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nature of the matter/case specify</label>
+                                    <textarea class="form-control" rows="5">@caseReportDescriptionOfTheCaseProblem.NatureOfTheMatterCaseOtherSpecify</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Please give details of the case including the charge bieng pressed and how the beneficiary is involved</label>
+                                    <textarea class="form-control" rows="5" name="caseReportDescriptionOfTheCaseProblem.DetailsOfCaseAndCharge">@caseReportDescriptionOfTheCaseProblem.DetailsOfCaseAndCharge</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="7" class="tab-pane fade">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Where does the beneficiary live?</label>
+                                    <select class="form-control" name="caseReportNeedsAssesment.WhereDoesTheBeneficiaryLive">
+                                        <option value="City" @(caseReportNeedsAssesment.WhereDoesTheBeneficiaryLive == "City" ? "selected" : "")>City</option>
+                                        <option value="Rural" @(caseReportNeedsAssesment.WhereDoesTheBeneficiaryLive == "Rural" ? "selected" : "")>Rural</option>
+                                        <option value="Other" @(caseReportNeedsAssesment.WhereDoesTheBeneficiaryLive == "Other" ? "selected" : "")>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Who is taking care of the beneficiary?</label>
+                                    <select class="form-control" name="caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiary">
+                                        <option value="Both Parents" @(caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiary == "Both Parents" ? "selected" : "")>Both Parents</option>
+                                        <option value="Father" @(caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiary == "Father" ? "selected" : "")>Father</option>
+                                        <option value="Mother" @(caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiary == "Mother" ? "selected" : "")>Mother</option>
+                                        <option value="Siblings" @(caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiary == "Siblings" ? "selected" : "")>Siblings</option>
+                                        <option value="Self" @(caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiary == "Self" ? "selected" : "")>Self</option>
+                                        <option value="Relatives/guardian" @(caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiary == "Relatives/guardian" ? "selected" : "")>Relatives/guardian</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Who is taking care of the beneficiary? other</label>
+                                    <textarea class="form-control" name="caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiaryOtherSpecify" rows="5">@caseReportNeedsAssesment.WhoIsTakingCareOfTheBeneficiaryOtherSpecify</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>How many people live with the beneficiary?</label>
+                                    <input class="form-control" type="number" min="0" step="1" value="@caseReportNeedsAssesment.HowManyPeopleLiveWithTheBeneficiary" name="caseReportNeedsAssesment.HowManyPeopleLiveWithTheBeneficiary" />
+                                </div>
+                                <div class="form-group">
+                                    <label>How are they related?</label>
+                                    <textarea class="form-control" name="caseReportNeedsAssesment.HowManyPeopleLiveWithTheBeneficiaryRelation" rows="5">@caseReportNeedsAssesment.HowManyPeopleLiveWithTheBeneficiaryRelation</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Is the beneficiary able to verbally communicate?</label>
+                                    <select class="form-control" name="caseReportNeedsAssesment.IsTheBeneficiaryAbleToVerballyCommunicate">
+                                        <option value="Yes" @(caseReportNeedsAssesment.IsTheBeneficiaryAbleToVerballyCommunicate == true ? "selected" : "")>Yes</option>
+                                        <option value="No" @(caseReportNeedsAssesment.IsTheBeneficiaryAbleToVerballyCommunicate == false ? "selected" : "")>No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>If NO, how does s/he communicate? (Please explain)</label>
+                                    <textarea class="form-control" name="caseReportNeedsAssesment.IfNoHowDoesHeSheCommunicate" rows="5">@caseReportNeedsAssesment.IfNoHowDoesHeSheCommunicate</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Is the beneficiary able to move independantly?</label>
+                                    <select class="form-control" name="caseReportNeedsAssesment.IsTheBeneficiaryAbleToMoveIndependently">
+                                        <option value="Yes" @(caseReportNeedsAssesment.IsTheBeneficiaryAbleToMoveIndependently == true ? "selected" : "")>Yes</option>
+                                        <option value="No" @(caseReportNeedsAssesment.IsTheBeneficiaryAbleToMoveIndependently == false ? "selected" : "")>No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>What assistance is needed?</label>
+                                    <textarea class="form-control" name="caseReportNeedsAssesment.IfNotWhatAssistanceIsNeededMovement" rows="5">@caseReportNeedsAssesment.IfNotWhatAssistanceIsNeededMovement</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Beneficiary well bieng (at the point of intake)?<br />Is the beneficiary reporting feeling good or bad</label>
+                                    <select class="form-control" name="caseReportNeedsAssesment.BeneficiaryWellBeingAtThePointOfIntake">
+                                        <option value="Feeling Good" @(caseReportNeedsAssesment.BeneficiaryWellBeingAtThePointOfIntake == "Feeling Good" ? "selected" : "")>Feeling Good</option>
+                                        <option value="Feeling Bad" @(caseReportNeedsAssesment.BeneficiaryWellBeingAtThePointOfIntake == "Feeling Bad" ? "selected" : "")>Feeling Bad</option>
+                                        <option value="Sad" @(caseReportNeedsAssesment.BeneficiaryWellBeingAtThePointOfIntake == "Sad" ? "selected" : "")>Sad</option>
+                                        <option value="Happy" @(caseReportNeedsAssesment.BeneficiaryWellBeingAtThePointOfIntake == "Happy" ? "selected" : "")>Happy</option>
+                                        <option value="Other" @(caseReportNeedsAssesment.BeneficiaryWellBeingAtThePointOfIntake == "Other" ? "selected" : "")>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Beneficiary well bieng other specify</label>
+                                    <textarea class="form-control" name="caseReportNeedsAssesment.BeneficiaryWellBeingAtThePointOfIntakeOtherSpecify" rows="5">@caseReportNeedsAssesment.BeneficiaryWellBeingAtThePointOfIntakeOtherSpecify</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>What are the immediate concerns of the beneficiary</label>
+                                    <textarea class="form-control" name="caseReportNeedsAssesment.BeneficiaryImmediateConcerns" rows="5">@caseReportNeedsAssesment.BeneficiaryImmediateConcerns</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Other relevant issues</label>
+                                    <textarea class="form-control" name="caseReportNeedsAssesment.OtherRelevantIssues" rows="5">@caseReportNeedsAssesment.OtherRelevantIssues</textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

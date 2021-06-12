@@ -20,6 +20,7 @@
     <thead>
         <tr>
             <th>Date</th>
+            <th>Case Number</th>
             <th>Referer/Institution</th>
             <th>Police Station</th>
             <th>C.R Ref</th>
@@ -31,6 +32,7 @@
         {
             <tr>
                 <td title="@item.Date?.ToString("yyyy-MM-dd")">@item.Date?.ToString("yyyy-MM-dd")</td>
+                <td title="@item.CaseNumber">@item.CaseNumber</td>
                 <td title="@item.ReferredByNameAndInstitution">@item.ReferredByNameAndInstitution</td>
                 <td title="@item.PoliceStation">@item.PoliceStation</td>
                 <td title="@item.CrRef">@item.CrRef</td>
