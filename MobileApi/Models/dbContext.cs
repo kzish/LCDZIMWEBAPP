@@ -23,13 +23,17 @@ namespace MobileApi.Models
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CareReportCareGiver> CareReportCareGiver { get; set; }
+        public virtual DbSet<CasePlanCaseLog> CasePlanCaseLog { get; set; }
+        public virtual DbSet<CasePlanCaseWorkplan> CasePlanCaseWorkplan { get; set; }
         public virtual DbSet<CaseReport> CaseReport { get; set; }
+        public virtual DbSet<CaseReportCasePlanAndFollowUp> CaseReportCasePlanAndFollowUp { get; set; }
         public virtual DbSet<CaseReportClientInformation> CaseReportClientInformation { get; set; }
         public virtual DbSet<CaseReportDescriptionOfTheCaseProblem> CaseReportDescriptionOfTheCaseProblem { get; set; }
         public virtual DbSet<CaseReportJustificationReportForAttendedCases> CaseReportJustificationReportForAttendedCases { get; set; }
         public virtual DbSet<CaseReportNeedsAssesment> CaseReportNeedsAssesment { get; set; }
         public virtual DbSet<CaseReportNextOfKin> CaseReportNextOfKin { get; set; }
         public virtual DbSet<CaseReportParentsGuardiansSpousesInformation> CaseReportParentsGuardiansSpousesInformation { get; set; }
+        public virtual DbSet<CaseReportPaymentsToBeneficiaries> CaseReportPaymentsToBeneficiaries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -185,6 +189,75 @@ namespace MobileApi.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<CasePlanCaseLog>(entity =>
+            {
+                entity.ToTable("case_plan.case_log");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ActionTakenActivity)
+                    .HasColumnName("action_taken_activity")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AttendingPerson)
+                    .HasColumnName("attending_person")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CasePlanId)
+                    .IsRequired()
+                    .HasColumnName("case_plan_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Outcome)
+                    .HasColumnName("outcome")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CasePlanCaseWorkplan>(entity =>
+            {
+                entity.ToTable("case_plan.case_workplan");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ActionToBeTaken)
+                    .HasColumnName("action_to_be_taken")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CasePlanId)
+                    .IsRequired()
+                    .HasColumnName("case_plan_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Done).HasColumnName("done");
+
+                entity.Property(e => e.Responsibility)
+                    .HasColumnName("responsibility")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<CaseReport>(entity =>
             {
                 entity.ToTable("case_report");
@@ -250,6 +323,58 @@ namespace MobileApi.Models
                 entity.Property(e => e.ReferredByNameAndInstitution)
                     .HasColumnName("referred_by_name_and_institution")
                     .HasMaxLength(200)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CaseReportCasePlanAndFollowUp>(entity =>
+            {
+                entity.ToTable("case_report.case_plan_and_follow_up");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ActionTakenByAnyoneDateThisFormWasCompleted)
+                    .HasColumnName("action_taken_by_anyone_date_this_form_was_completed")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AnyOtherImportantNotes)
+                    .HasColumnName("any_other_important_notes")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApprovedBy)
+                    .HasColumnName("approved_by")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApprovedBySignature)
+                    .HasColumnName("approved_by_signature")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CaseId)
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CompiledBy)
+                    .HasColumnName("compiled_by")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.StageCaseRefered)
+                    .HasColumnName("stage_case_refered")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StateOtherNeedsOfTheBeneficiaryForReferalToOtherServiceProviders)
+                    .HasColumnName("state_other_needs_of_the_beneficiary_for_referal_to_other_service_providers")
                     .IsUnicode(false);
             });
 
@@ -633,6 +758,127 @@ namespace MobileApi.Models
                     .WithMany(p => p.CaseReportParentsGuardiansSpousesInformation)
                     .HasForeignKey(d => d.CaseId)
                     .HasConstraintName("FK_case_report.parents_guardians_spouses_information_case_report");
+            });
+
+            modelBuilder.Entity<CaseReportPaymentsToBeneficiaries>(entity =>
+            {
+                entity.ToTable("case_report.payments_to_beneficiaries");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Accomodation)
+                    .HasColumnName("accomodation")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.AuthorisedByDate)
+                    .HasColumnName("authorised_by_date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.AuthorisedByName)
+                    .HasColumnName("authorised_by_name")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.AuthorisedBySignature)
+                    .HasColumnName("authorised_by_signature")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Breakfast)
+                    .HasColumnName("breakfast")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.BusFare)
+                    .HasColumnName("bus_fare")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.CaseId)
+                    .IsRequired()
+                    .HasColumnName("case_id")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CheckedByDate)
+                    .HasColumnName("checked_by_date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.CheckedByName)
+                    .HasColumnName("checked_by_name")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CheckedBySignature)
+                    .HasColumnName("checked_by_signature")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnName("date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Dinner)
+                    .HasColumnName("dinner")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.ExpenseCode)
+                    .HasColumnName("expense_code")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdNumber)
+                    .HasColumnName("id_number")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Lunch)
+                    .HasColumnName("lunch")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Other)
+                    .HasColumnName("other")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.PaidByDate)
+                    .HasColumnName("paid_by_date")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.PaidByName)
+                    .HasColumnName("paid_by_name")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaidBySignature)
+                    .HasColumnName("paid_by_signature")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PerDiem)
+                    .HasColumnName("per_diem")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Program)
+                    .HasColumnName("program")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Purpose)
+                    .HasColumnName("purpose")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SignatureOfRecipient)
+                    .HasColumnName("signature_of_recipient")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
             });
         }
     }
