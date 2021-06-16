@@ -209,9 +209,9 @@ namespace Admin.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CasePlanId)
+                entity.Property(e => e.CaseId)
                     .IsRequired()
-                    .HasColumnName("case_plan_id")
+                    .HasColumnName("case_id")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -240,9 +240,9 @@ namespace Admin.Models
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CasePlanId)
+                entity.Property(e => e.CaseId)
                     .IsRequired()
-                    .HasColumnName("case_plan_id")
+                    .HasColumnName("case_id")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
