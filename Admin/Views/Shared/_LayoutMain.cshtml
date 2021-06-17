@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>@ViewBag.title - Speedlink</title>
+    <title>@ViewBag.title - LCDZIM</title>
     <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/assets/css/main_style.css" rel="stylesheet" />
     <link href="~/assets/css/cust_style.css?v=" rel="stylesheet" />
@@ -81,7 +81,7 @@
 
 
                 <li class="@(ViewBag.title=="CaseReports"?"active":"")">
-                    <a href="~/CaseReports/Index">CaseReports</a>
+                    <a href="~/CaseReports/Index">All CaseReports</a>
                 </li>
 
                 @*<li class="@(ViewBag.title=="Clients"?"active":"")">
@@ -96,21 +96,32 @@
                     <a href="~/Home/AllRoles">Roles</a>
                 </li>*@
 
-                @*<li @(ViewBag.title.Contains("Roles") ? "active" : "")>
-                    <a href="#roles"
-                       data-toggle="collapse"
-                       aria-expanded="false"
-                       class="dropdown-toggle">Roles</a>
-                    <ul class="collapse list-unstyled" id="roles">
-                        <li>
-                            <a href="/Roles/All">All Roles</a>
+                @if (ViewBag.case_report_id != null)
+                {
+                        <li class="active">
+                            <a 
+                               href="#roles" 
+                               data-toggle="collapse" 
+                               aria-expanded="true" 
+                               class="dropdown-toggle">CaseReport Menu</a>
+                            <ul class="list-unstyled collapse in show" id="roles" aria-expanded="true" style="">
+                                <li>
+                                    <a href="~/CaseReports/EditCaseReport/@ViewBag.case_report_id">Case Report</a>
+                                </li>
+                                <li>
+                                    <a href="~/CaseReports/JustificationReports/@ViewBag.case_report_id">Justification Reports</a>
+                                </li>
+                                <li>
+                                    <a href="~/CaseReports/PaymentsToBeneficiaries/@ViewBag.case_report_id">Payments To Beneficiary</a>
+                                </li>
+                                <li>
+                                    <a href="~/CaseReports/CasePlan/@ViewBag.case_report_id">Case Plan</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="/Roles/CreateNewRole">Create New Role</a>
-                        </li>
-                    </ul>
-                </li>
+                }
 
+                @*
                 <li @(ViewBag.title.Contains("Settings") ? "active" : "")>
                     <a href="#settings"
                        data-toggle="collapse"

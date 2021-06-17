@@ -30,5 +30,7 @@ namespace Admin.Models
         public string AuthorisedByName { get; set; }
         public string AuthorisedBySignature { get; set; }
         public DateTime? AuthorisedByDate { get; set; }
+
+        public virtual CaseReport Case { get; set; }
     }
 }

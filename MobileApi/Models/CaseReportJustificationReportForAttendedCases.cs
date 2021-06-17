@@ -21,5 +21,7 @@ namespace MobileApi.Models
         public DateTime? PreparedByDate { get; set; }
         public string ApprovedBy { get; set; }
         public DateTime? ApprovedByDate { get; set; }
+
+        public virtual CaseReport Case { get; set; }
     }
 }

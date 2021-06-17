@@ -1,0 +1,120 @@
+﻿@{ Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var caseReportCasePlanAndFollowUp = (Admin.Models.CaseReportCasePlanAndFollowUp)ViewBag.caseReportCasePlanAndFollowUp;
+
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="" method="post">
+
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#1">Case Plan & Follow Up</a></li>
+                    <li><a data-toggle="tab" href="#2">Work Plan</a></li>
+                    <li><a data-toggle="tab" href="#3">Case Log</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="1" class="tab-pane fade in active">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Date Of Plan</label>
+                                    <input type="date" class="form-control" name="caseReportCasePlanAndFollowUp.Date" value="@caseReportCasePlanAndFollowUp.Date?.ToString("yyyy-MM-dd")">
+                                </div>
+                                <div class="form-group">
+                                    <label>At what stage was the case referred to you?</label>
+                                    <select class="form-control" name="caseReportCasePlanAndFollowUp">
+                                        <option value="Pre-trial" @(caseReportCasePlanAndFollowUp.StageCaseRefered == "Pre-trial" ? "selected" : "")>Pre-trial</option>
+                                        <option value="Trial" @(caseReportCasePlanAndFollowUp.StageCaseRefered == "Trial" ? "selected" : "")>Trial</option>
+                                        <option value="Post-trial" @(caseReportCasePlanAndFollowUp.StageCaseRefered == "Post-trial" ? "selected" : "")>Post-trial</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Any Action Already taken by anyone as of the date this form is completed?</label>
+                                    <textarea rows="5" class="form-control" name="caseReportCasePlanAndFollowUp.ActionTakenByAnyoneDateThisFormWasCompleted">@caseReportCasePlanAndFollowUp.ActionTakenByAnyoneDateThisFormWasCompleted</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Any other important notes</label>
+                                    <textarea rows="5" class="form-control" name="caseReportCasePlanAndFollowUp.AnyOtherImportantNotes">@caseReportCasePlanAndFollowUp.AnyOtherImportantNotes</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>State other needs of the beneficiary for referral to other service providers</label>
+                                    <textarea rows="5" class="form-control" name="caseReportCasePlanAndFollowUp.AnyOtherImportantNotes">@caseReportCasePlanAndFollowUp.AnyOtherImportantNotes</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Compiled by</label>
+                                    <input type="text" class="form-control" name="caseReportCasePlanAndFollowUp.CompiledBy" value="@caseReportCasePlanAndFollowUp.CompiledBy">
+                                </div>
+                                 <div class="form-group">
+                                    <label>Compiled by</label>
+                                    <input type="text" class="form-control" name="caseReportCasePlanAndFollowUp.ApprovedBy" value="@caseReportCasePlanAndFollowUp.ApprovedBy">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="2" class="tab-pane fade">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9" id="work_plan_data">
+                                <center id="loader1">
+                                    <img src="~/assets/img/_loading.gif" height="100" width="100" />
+                                </center>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="3" class="tab-pane fade">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-9" id="case_log_data">
+                                <center id="loader2">
+                                    <img src="~/assets/img/_loading.gif" height="100" width="100" />
+                                </center>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    $.ajax({
+        url: "@Url.Content("~/CaseReports/ajaxListWorkPlan/")@ViewBag.case_report_id",
+        success: function (data) {
+            $("#loader1").hide();
+            $("#work_plan_data").html(data);
+        },
+        error: function () {
+            alert("Server Error");
+            $("#loader1").hide();
+        },
+    });
+
+    $.ajax({
+        url: "@Url.Content("~/CaseReports/ajaxListCaseLog/")@ViewBag.case_report_id",
+        success: function (data) {
+            $("#loader2").hide();
+            $("#case_log_data").html(data);
+        },
+        error: function () {
+            alert("Server Error");
+            $("#loader2").hide();
+        },
+    });
+
+</script>

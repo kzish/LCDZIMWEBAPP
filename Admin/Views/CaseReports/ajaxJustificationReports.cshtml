@@ -1,0 +1,90 @@
+﻿@{ var items = (List<Admin.Models.CaseReportJustificationReportForAttendedCases>)ViewBag.caseReportJustificationReportForAttendedCases; }
+<style>
+    @*style the drop down select entries - datatables*@
+    .custom-select
+    {
+        height:30px!important;
+        width:50px!important;
+        margin-left:5px!important;
+    }
+    @*style the copy buttons- datatables*@
+    .dt-buttons
+    {
+        margin-left:4px!important;
+    }
+</style>
+
+<table id="dt" class="table tblsm">
+    <thead>
+        <tr>
+            <th>Name Of Beneficiary</th>
+            <th>Place of Origin/Residence</th>
+            <th>Place Of Activity</th>
+            <th>Date Of Assistance</th>
+            <th>Logistical Support</th>
+            <th>Home Visit</th>
+            <th>Disability Expert</th>
+            <th>Summary Of Activity</th>
+            <th>Outcome</th>
+            <th>Date of Court Hearing</th>
+            <th>Prepared By</th>
+            <th>Prepared By Date</th>
+            <th>Approved By Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in items)
+        {
+<tr>
+    <td title="@item.NameOfBeneficiary">@item.NameOfBeneficiary</td>
+    <td title="@item.PlaceOfOriginResidence">@item.PlaceOfOriginResidence</td>
+    <td title="@item.PlaceOfActivity">@item.PlaceOfActivity</td>
+    <td title="@item.DateWhenTheBeneficiaryWasAssisted">@item.DateWhenTheBeneficiaryWasAssisted</td>
+    <td title=""><input type="checkbox" @(item.TypeOfAssistanceLogisticalSupport==true?"checked":"")/></td>
+    <td title=""><input type="checkbox" @(item.TypeOfAssistanceHomeVisit==true?"checked":"")/></td>
+    <td title=""><input type="checkbox" @(item.TypeOfAssistanceDisabilityExpert==true?"checked":"")/></td>
+    <td title="@item.SummaryOfActivity">@item.SummaryOfActivity</td>
+    <td title="@item.Outcome">@item.Outcome </td>
+    <td title="@item.DateOfCourtHearing?.ToString("yyyy-MM-dd")">@item.DateOfCourtHearing?.ToString("yyyy-MM-dd")</td>
+    <td title="@item.PreparedBy">@item.PreparedBy</td>
+    <td title="@item.PreparedByDate?.ToString("yyyy-MM-dd")">@item.PreparedByDate?.ToString("yyyy-MM-dd")</td>
+    <td title="@item.ApprovedBy">@item.ApprovedBy</td>
+    <td title="@item.ApprovedByDate?.ToString("yyyy-MM-dd")">@item.ApprovedByDate?.ToString("yyyy-MM-dd")</td>
+</tr>
+}
+    </tbody>
+</table>
+
+<script>
+
+    $('#dt').DataTable({
+        select: true,
+        responsive: true,
+        dom: 'lBfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+
+    function confirm_delete(id) {
+        $.confirm({
+            title: 'Information',
+            type: "red",
+            content: 'Delete this CaseReport?',
+            buttons: {
+                Yes: function () {
+                    window.location = "../CaseReports/DeleteCaseReport/" + id;
+                },
+                No: function () {
+                },
+
+            }
+        });
+
+    }
+
+</script>

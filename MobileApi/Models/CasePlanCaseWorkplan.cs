@@ -11,5 +11,7 @@ namespace MobileApi.Models
         public DateTime? Date { get; set; }
         public string Responsibility { get; set; }
         public bool? Done { get; set; }
+
+        public virtual CaseReport Case { get; set; }
     }
 }

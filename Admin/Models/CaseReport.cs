@@ -7,11 +7,17 @@ namespace Admin.Models
     {
         public CaseReport()
         {
+            CareReportCareGiver = new HashSet<CareReportCareGiver>();
+            CasePlanCaseLog = new HashSet<CasePlanCaseLog>();
+            CasePlanCaseWorkplan = new HashSet<CasePlanCaseWorkplan>();
+            CaseReportCasePlanAndFollowUp = new HashSet<CaseReportCasePlanAndFollowUp>();
             CaseReportClientInformation = new HashSet<CaseReportClientInformation>();
             CaseReportDescriptionOfTheCaseProblem = new HashSet<CaseReportDescriptionOfTheCaseProblem>();
+            CaseReportJustificationReportForAttendedCases = new HashSet<CaseReportJustificationReportForAttendedCases>();
             CaseReportNeedsAssesment = new HashSet<CaseReportNeedsAssesment>();
             CaseReportNextOfKin = new HashSet<CaseReportNextOfKin>();
             CaseReportParentsGuardiansSpousesInformation = new HashSet<CaseReportParentsGuardiansSpousesInformation>();
+            CaseReportPaymentsToBeneficiaries = new HashSet<CaseReportPaymentsToBeneficiaries>();
         }
 
         public string Id { get; set; }
@@ -28,10 +34,16 @@ namespace Admin.Models
         public string CompiledBy { get; set; }
         public DateTime? DateCompiled { get; set; }
 
+        public virtual ICollection<CareReportCareGiver> CareReportCareGiver { get; set; }
+        public virtual ICollection<CasePlanCaseLog> CasePlanCaseLog { get; set; }
+        public virtual ICollection<CasePlanCaseWorkplan> CasePlanCaseWorkplan { get; set; }
+        public virtual ICollection<CaseReportCasePlanAndFollowUp> CaseReportCasePlanAndFollowUp { get; set; }
         public virtual ICollection<CaseReportClientInformation> CaseReportClientInformation { get; set; }
         public virtual ICollection<CaseReportDescriptionOfTheCaseProblem> CaseReportDescriptionOfTheCaseProblem { get; set; }
+        public virtual ICollection<CaseReportJustificationReportForAttendedCases> CaseReportJustificationReportForAttendedCases { get; set; }
         public virtual ICollection<CaseReportNeedsAssesment> CaseReportNeedsAssesment { get; set; }
         public virtual ICollection<CaseReportNextOfKin> CaseReportNextOfKin { get; set; }
         public virtual ICollection<CaseReportParentsGuardiansSpousesInformation> CaseReportParentsGuardiansSpousesInformation { get; set; }
+        public virtual ICollection<CaseReportPaymentsToBeneficiaries> CaseReportPaymentsToBeneficiaries { get; set; }
     }
 }

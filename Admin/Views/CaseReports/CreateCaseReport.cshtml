@@ -188,11 +188,11 @@
                                 <div class="form-group">
                                     <label>Marital Status</label>
                                     <select class="form-control" name="caseReportClientInformation.LevelOfEducation">
-                                        <option value="Married" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "married" ? "selected" : "")>Married</option>
-                                        <option value="Divorced" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "divorced" ? "selected" : "")>Divorced</option>
-                                        <option value="Widowed" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "widowed" ? "selected" : "")>Widowed</option>
-                                        <option value="Seperated" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "seperated" ? "selected" : "")>Seperated</option>
-                                        <option value="Other" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus.ToLower() == "other" ? "selected" : "")>Other</option>
+                                        <option value="Married" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus?.ToLower() == "married" ? "selected" : "")>Married</option>
+                                        <option value="Divorced" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus?.ToLower() == "divorced" ? "selected" : "")>Divorced</option>
+                                        <option value="Widowed" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus?.ToLower() == "widowed" ? "selected" : "")>Widowed</option>
+                                        <option value="Seperated" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus?.ToLower() == "seperated" ? "selected" : "")>Seperated</option>
+                                        <option value="Other" @(caseReportParentsGuardiansSpousesInformation.MaritalStatus?.ToLower() == "other" ? "selected" : "")>Other</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

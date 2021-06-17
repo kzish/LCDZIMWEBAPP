@@ -34,22 +34,27 @@ namespace MobileApi.Controllers
         [HttpPost("UpdateCaseReport")]
         public async Task<JsonResult> UpdateCaseReport
            (
-           string __caseReport,
-           string __caseReportClientInformation,
-           string __caseReportDescriptionOfTheCaseProblem,
-           string __caseReportNeedsAssesment,
-           string __caseReportNextOfKin,
-           string __caseReportCareGiver,
-           string __caseReportParentsGuardiansSpousesInformation
+            String __casePlanCaseLog,
+            String __casePlanCaseWorkplan,
+            String __caseReport,
+            String __caseReportCareGiver,
+            String __caseReportCasePlanAndFollowUp,
+            String __caseReportClientInformation,
+            String __caseReportDescriptionOfTheCaseProblem,
+            String __caseReportJustificationReportForAttendedCases,
+            String __caseReportNeedsAssesment,
+            String __caseReportNextOfKin,
+            String __caseReportParentsGuardiansSpousesInformation,
+            String __caseReportPaymentsToBeneficiaries
            )
         {
-            _logger.LogInformation("__caseReport: " + __caseReport);
-            _logger.LogInformation("__caseReportClientInformation: " + __caseReportClientInformation);
-            _logger.LogInformation("__caseReportDescriptionOfTheCaseProblem: " + __caseReportDescriptionOfTheCaseProblem);
-            _logger.LogInformation("__caseReportNeedsAssesment: " + __caseReportNeedsAssesment);
-            _logger.LogInformation("__caseReportNextOfKin: " + __caseReportNextOfKin);
-            _logger.LogInformation("__caseReportCareGiver: " + __caseReportCareGiver);
-            _logger.LogInformation("__caseReportParentsGuardiansSpousesInformation: " + __caseReportParentsGuardiansSpousesInformation);
+            //_logger.LogInformation("__caseReport: " + __caseReport);
+            //_logger.LogInformation("__caseReportClientInformation: " + __caseReportClientInformation);
+            //_logger.LogInformation("__caseReportDescriptionOfTheCaseProblem: " + __caseReportDescriptionOfTheCaseProblem);
+            //_logger.LogInformation("__caseReportNeedsAssesment: " + __caseReportNeedsAssesment);
+            //_logger.LogInformation("__caseReportNextOfKin: " + __caseReportNextOfKin);
+            //_logger.LogInformation("__caseReportCareGiver: " + __caseReportCareGiver);
+            //_logger.LogInformation("__caseReportParentsGuardiansSpousesInformation: " + __caseReportParentsGuardiansSpousesInformation);
 
             try
             {
@@ -61,11 +66,17 @@ namespace MobileApi.Controllers
                 CareReportCareGiver _caseReportCareGiver = JsonConvert.DeserializeObject<CareReportCareGiver>(__caseReportCareGiver);
                 CaseReportParentsGuardiansSpousesInformation _caseReportParentsGuardiansSpousesInformation = JsonConvert.DeserializeObject<CaseReportParentsGuardiansSpousesInformation>(__caseReportParentsGuardiansSpousesInformation);
 
+                List<CasePlanCaseLog> _casePlanCaseLog = JsonConvert.DeserializeObject<List<CasePlanCaseLog>>(__casePlanCaseLog);
+                List<CasePlanCaseWorkplan> _casePlanCaseWorkplan = JsonConvert.DeserializeObject<List<CasePlanCaseWorkplan>>(__casePlanCaseWorkplan);
+                CaseReportCasePlanAndFollowUp _caseReportCasePlanAndFollowUp = JsonConvert.DeserializeObject<CaseReportCasePlanAndFollowUp>(__caseReportCasePlanAndFollowUp);
+                List<CaseReportJustificationReportForAttendedCases> _caseReportJustificationReportForAttendedCases = JsonConvert.DeserializeObject<List<CaseReportJustificationReportForAttendedCases>>(__caseReportJustificationReportForAttendedCases);
+                List<CaseReportPaymentsToBeneficiaries> _caseReportPaymentsToBeneficiaries = JsonConvert.DeserializeObject<List<CaseReportPaymentsToBeneficiaries>>(__caseReportPaymentsToBeneficiaries);
 
                 //using (var transaction = db.Database.BeginTransaction())
                 {
                     try
                     {
+                        
                         var caseReport = db.CaseReport.Where(i => i.Id == _caseReport.Id).Any();
                         if (!caseReport)
                         {
@@ -74,6 +85,18 @@ namespace MobileApi.Controllers
                         else
                         {
                             db.Entry(_caseReport).State = EntityState.Modified;
+                        }
+                        if (_caseReportCasePlanAndFollowUp != null)
+                        {
+                            var caseReportCasePlanAndFollowUp = db.CaseReportCasePlanAndFollowUp.Where(i => i.Id == _caseReportCasePlanAndFollowUp.Id).Any();
+                            if (!caseReportCasePlanAndFollowUp)
+                            {
+                                db.CaseReportCasePlanAndFollowUp.Add(_caseReportCasePlanAndFollowUp);
+                            }
+                            else
+                            {
+                                db.Entry(_caseReportCasePlanAndFollowUp).State = EntityState.Modified;
+                            }
                         }
                         //
                         var caseReportClientInformation = db.CaseReportClientInformation.Where(i => i.Id == _caseReportClientInformation.Id).Any();
@@ -136,6 +159,18 @@ namespace MobileApi.Controllers
                             db.Entry(_caseReportParentsGuardiansSpousesInformation).State = EntityState.Modified;
                         }
 
+                        //clear all list items
+                        db.CasePlanCaseLog.RemoveRange(db.CasePlanCaseLog.Where(i => i.CaseId == _caseReport.Id).ToList());
+                        db.CasePlanCaseWorkplan.RemoveRange(db.CasePlanCaseWorkplan.Where(i => i.CaseId == _caseReport.Id).ToList());
+                        db.CaseReportJustificationReportForAttendedCases.RemoveRange(db.CaseReportJustificationReportForAttendedCases.Where(i => i.CaseId == _caseReport.Id).ToList());
+                        db.CaseReportPaymentsToBeneficiaries.RemoveRange(db.CaseReportPaymentsToBeneficiaries.Where(i => i.CaseId == _caseReport.Id).ToList());
+
+                        //add all lists
+                        db.CasePlanCaseLog.AddRange(_casePlanCaseLog);
+                        db.CasePlanCaseWorkplan.AddRange(_casePlanCaseWorkplan);
+                        db.CaseReportJustificationReportForAttendedCases.AddRange(_caseReportJustificationReportForAttendedCases);
+                        db.CaseReportPaymentsToBeneficiaries.AddRange(_caseReportPaymentsToBeneficiaries);
+
                         await db.SaveChangesAsync();
                         //transaction.Commit();
                         return Json(new
@@ -166,5 +201,5 @@ namespace MobileApi.Controllers
         }
 
 
-        }//.
+    }//.
 }//.

@@ -11,5 +11,7 @@ namespace Admin.Models
         public string ActionTakenActivity { get; set; }
         public string Outcome { get; set; }
         public string AttendingPerson { get; set; }
+
+        public virtual CaseReport Case { get; set; }
     }
 }

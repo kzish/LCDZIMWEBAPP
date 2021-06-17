@@ -42,3 +42,10 @@ C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Admin.pdb
 C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Admin.genruntimeconfig.cache
 C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Admin.csproj.CopyComplete
 C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Admin.csproj.AssemblyReference.cache
+C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Razor\Views\CaseReports\ajaxListCaseLog.cshtml.g.cs
+C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Razor\Views\CaseReports\ajaxListWorkPlan.cshtml.g.cs
+C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Razor\Views\CaseReports\CasePlan.cshtml.g.cs
+C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Razor\Views\CaseReports\ajaxPaymentsToBeneficiaries.cshtml.g.cs
+C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Razor\Views\CaseReports\PaymentsToBeneficiaries.cshtml.g.cs
+C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Razor\Views\CaseReports\ajaxJustificationReports.cshtml.g.cs
+C:\.NetProjects\LCDZIMWEPAPP\Admin\obj\Debug\netcoreapp2.2\Razor\Views\CaseReports\JustificationReports.cshtml.g.cs

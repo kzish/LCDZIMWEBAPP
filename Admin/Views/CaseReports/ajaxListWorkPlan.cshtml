@@ -1,5 +1,5 @@
 ﻿@{
-    var case_reports = (List<Admin.Models.CaseReport>)ViewBag.case_reports;
+    var items = (List<Admin.Models.CasePlanCaseWorkplan>)ViewBag.work_plans;
 }
 <style>
     @*style the drop down select entries - datatables*@
@@ -20,31 +20,17 @@
     <thead>
         <tr>
             <th>Date</th>
-            <th>Case Number</th>
-            <th>Referer/Institution</th>
-            <th>Police Station</th>
-            <th>C.R Ref</th>
-            <th>Action</th>
+            <th>Action to be taken</th>
+            <th>Responsibility</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in case_reports)
+        @foreach (var item in items)
         {
             <tr>
                 <td title="@item.Date?.ToString("yyyy-MM-dd")">@item.Date?.ToString("yyyy-MM-dd")</td>
-                <td title="@item.CaseNumber">@item.CaseNumber</td>
-                <td title="@item.ReferredByNameAndInstitution">@item.ReferredByNameAndInstitution</td>
-                <td title="@item.PoliceStation">@item.PoliceStation</td>
-                <td title="@item.CrRef">@item.CrRef</td>
-                <td>
-                    <a href="~/CaseReports/EditCaseReport/@item.Id" style="color:blue;">
-                        Open
-                    </a>
-                    |
-                    <a href="javascript:void(0);" style="color:red;" onclick="confirm_delete('@item.Id')">
-                        Delete
-                    </a>
-                </td>
+                <td title="@item.ActionToBeTaken">@item.ActionToBeTaken</td>
+                <td title="@item.Responsibility">@item.Responsibility</td>
             </tr>
         }
     </tbody>

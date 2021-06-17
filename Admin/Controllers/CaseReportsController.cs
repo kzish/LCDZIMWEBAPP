@@ -110,7 +110,7 @@ namespace Admin.Controllers
             ViewBag.caseReportNeedsAssesment = _caseReportNeedsAssesment;
             ViewBag.caseReportNextOfKin = _caseReportNextOfKin;
             ViewBag.caseReportParentsGuardiansSpousesInformation = _caseReportParentsGuardiansSpousesInformation;
-
+            ViewBag.case_report_id = _caseReport.Id;
             return View();
         }
 
@@ -236,7 +236,78 @@ namespace Admin.Controllers
             ViewBag.careReportCareGiver = careReportCareGiver;
             ViewBag.caseReportParentsGuardiansSpousesInformation = caseReportParentsGuardiansSpousesInformation;
 
+            ViewBag.case_report_id = caseReport.Id;
             return View("CreateCaseReport");
+        }
+
+
+        [HttpGet("CasePlan/{id}")]
+        public IActionResult CasePlan(string id)
+        {
+            ViewBag.title = "CasePlan";
+            var caseReport = db.CaseReport.Where(i => i.Id == id).FirstOrDefault();
+            var caseReportCasePlanAndFollowUp = db.CaseReportCasePlanAndFollowUp.Where(i => i.CaseId == id).FirstOrDefault();
+            ViewBag.caseReportCasePlanAndFollowUp = caseReportCasePlanAndFollowUp??new CaseReportCasePlanAndFollowUp();
+            ViewBag.case_report_id = caseReport.Id;
+            return View("CasePlan");
+        }
+
+
+        [HttpGet("ajaxListWorkPlan/{id}")]
+        public IActionResult ajaxListWorkPlan(string id)
+        {
+            ViewBag.title = "ajaxListWorkPlan";
+            var work_plans = db.CasePlanCaseWorkplan.Where(i => i.CaseId == id).ToList();
+            ViewBag.work_plans = work_plans;
+            return View();
+        }
+
+        [HttpGet("ajaxListCaseLog/{id}")]
+        public IActionResult ajaxListCaseLog(string id)
+        {
+            ViewBag.title = "ajaxListCaseLog";
+            var case_logs = db.CasePlanCaseLog.Where(i => i.CaseId == id).ToList();
+            ViewBag.case_logs = case_logs;
+            return View();
+        }
+
+        [HttpGet("ajaxPaymentsToBeneficiaries/{id}")]
+        public IActionResult ajaxPaymentsToBeneficiaries(string id)
+        {
+            ViewBag.title = "ajaxPaymentsToBeneficiaries";
+            var caseReportPaymentsToBeneficiaries = db.CaseReportPaymentsToBeneficiaries.Where(i => i.CaseId == id).ToList();
+            ViewBag.caseReportPaymentsToBeneficiaries = caseReportPaymentsToBeneficiaries;
+            return View();
+        }
+
+        [HttpGet("PaymentsToBeneficiaries/{id}")]
+        public IActionResult PaymentsToBeneficiaries(string id)
+        {
+            ViewBag.title = "Payments To Beneficiaries";
+            var caseReport = db.CaseReport.Where(i => i.Id == id).FirstOrDefault();
+            var caseReportPaymentsToBeneficiaries = db.CaseReportPaymentsToBeneficiaries.Where(i => i.CaseId == id).ToList();
+            ViewBag.caseReportPaymentsToBeneficiaries = caseReportPaymentsToBeneficiaries;
+            ViewBag.case_report_id = caseReport.Id;
+            return View();
+        }
+
+
+        [HttpGet("ajaxJustificationReports/{id}")]
+        public IActionResult ajaxJustificationReports(string id)
+        {
+            ViewBag.title = "JustificationReports";
+            var caseReportJustificationReportForAttendedCases = db.CaseReportJustificationReportForAttendedCases.Where(i => i.CaseId == id).ToList();
+            ViewBag.caseReportJustificationReportForAttendedCases = caseReportJustificationReportForAttendedCases;
+            return View();
+        }
+
+        [HttpGet("JustificationReports/{id}")]
+        public IActionResult JustificationReports(string id)
+        {
+            ViewBag.title = "Justification Reports";
+            var caseReport = db.CaseReport.Where(i => i.Id == id).FirstOrDefault();
+            ViewBag.case_report_id = caseReport.Id;
+            return View();
         }
 
 

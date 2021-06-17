@@ -12,5 +12,7 @@ namespace MobileApi.Models
         public string CareGiverSex { get; set; }
         public string CareGiverPhoneNumber { get; set; }
         public string CareGiverAddress { get; set; }
+
+        public virtual CaseReport Case { get; set; }
     }
 }

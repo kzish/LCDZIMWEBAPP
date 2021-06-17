@@ -187,6 +187,12 @@ namespace Admin.Models
                     .HasColumnName("case_id")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Case)
+                    .WithMany(p => p.CareReportCareGiver)
+                    .HasForeignKey(d => d.CaseId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_care_report.care_giver_case_report");
             });
 
             modelBuilder.Entity<CasePlanCaseLog>(entity =>
@@ -223,6 +229,11 @@ namespace Admin.Models
                     .HasColumnName("outcome")
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Case)
+                    .WithMany(p => p.CasePlanCaseLog)
+                    .HasForeignKey(d => d.CaseId)
+                    .HasConstraintName("FK_case_plan.case_log_case_report");
             });
 
             modelBuilder.Entity<CasePlanCaseWorkplan>(entity =>
@@ -256,6 +267,11 @@ namespace Admin.Models
                     .HasColumnName("responsibility")
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Case)
+                    .WithMany(p => p.CasePlanCaseWorkplan)
+                    .HasForeignKey(d => d.CaseId)
+                    .HasConstraintName("FK_case_plan.case_workplan_case_report");
             });
 
             modelBuilder.Entity<CaseReport>(entity =>
@@ -376,6 +392,12 @@ namespace Admin.Models
                 entity.Property(e => e.StateOtherNeedsOfTheBeneficiaryForReferalToOtherServiceProviders)
                     .HasColumnName("state_other_needs_of_the_beneficiary_for_referal_to_other_service_providers")
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Case)
+                    .WithMany(p => p.CaseReportCasePlanAndFollowUp)
+                    .HasForeignKey(d => d.CaseId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_case_report.case_plan_and_follow_up_case_report");
             });
 
             modelBuilder.Entity<CaseReportClientInformation>(entity =>
@@ -572,6 +594,11 @@ namespace Admin.Models
                 entity.Property(e => e.TypeOfAssistanceHomeVisit).HasColumnName("type_of_assistance_home_visit");
 
                 entity.Property(e => e.TypeOfAssistanceLogisticalSupport).HasColumnName("type_of_assistance_logistical_support");
+
+                entity.HasOne(d => d.Case)
+                    .WithMany(p => p.CaseReportJustificationReportForAttendedCases)
+                    .HasForeignKey(d => d.CaseId)
+                    .HasConstraintName("FK_case_report.justification_report_for_attended_cases_case_report");
             });
 
             modelBuilder.Entity<CaseReportNeedsAssesment>(entity =>
@@ -879,6 +906,11 @@ namespace Admin.Models
                     .HasColumnName("signature_of_recipient")
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Case)
+                    .WithMany(p => p.CaseReportPaymentsToBeneficiaries)
+                    .HasForeignKey(d => d.CaseId)
+                    .HasConstraintName("FK_case_report.payments_to_beneficiaries_case_report");
             });
         }
     }

@@ -1,0 +1,111 @@
+﻿@{ var items = (List<Admin.Models.CaseReportPaymentsToBeneficiaries>)ViewBag.caseReportPaymentsToBeneficiaries; }
+<style>
+    @*style the drop down select entries - datatables*@
+    .custom-select
+    {
+        height:30px!important;
+        width:50px!important;
+        margin-left:5px!important;
+    }
+    @*style the copy buttons- datatables*@
+    .dt-buttons
+    {
+        margin-left:4px!important;
+    }
+</style>
+
+<table id="dt" class="table tblsm">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>ID Number</th>
+            <th>Bus Fare</th>
+            <th>BreakFast</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+            <th>Accomodation</th>
+            <th>Per Diem</th>
+            <th>Other</th>
+            <th>Expense Code</th>
+            <th>PaidBy Name</th>
+            <th>PaidBy Date</th>
+            <th>CheckedBy Name</th>
+            <th>CheckedBy Date</th>
+            <th>AuthorizedBy Name</th>
+            <th>AuthorizedBy Date</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in items)
+        {
+<tr>
+    <td title="@item.Date?.ToString("yyyy-MM-dd")">@item.Date?.ToString("yyyy-MM-dd")</td>
+    <td title="@item.Name">@item.Name</td>
+    <td title="@item.IdNumber">@item.IdNumber</td>
+    <td title="@item.BusFare">@item.BusFare</td>
+    <td title="@item.Breakfast">@item.Breakfast</td>
+    <td title="@item.Lunch">@item.Lunch</td>
+    <td title="@item.Dinner">@item.Dinner</td>
+    <td title="@item.Accomodation">@item.Accomodation</td>
+    <td title="@item.PerDiem">@item.PerDiem</td>
+    <td title="@item.Other">@item.Other</td>
+    <td title="@item.ExpenseCode">@item.ExpenseCode</td>
+    <td title="@item.PaidByName">@item.PaidByName</td>
+    <td title="@item.PaidByDate?.ToString("yyyy-MM-dd")">@item.PaidByDate?.ToString("yyyy-MM-dd")</td>
+    <td title="@item.CheckedByName">@item.CheckedByName</td>
+    <td title="@item.CheckedByDate?.ToString("yyyy-MM-dd")">@item.CheckedByDate?.ToString("yyyy-MM-dd")</td>
+    <td title="@item.AuthorisedByName">@item.AuthorisedByName</td>
+    <td title="@item.AuthorisedByDate?.ToString("yyyy-MM-dd")">@item.AuthorisedByDate?.ToString("yyyy-MM-dd")</td>
+    <td title="Total">
+        <b style="color:red">
+            @(
+        item.BusFare +
+        item.Breakfast +
+        item.Lunch +
+        item.Dinner+
+        item.Accomodation+
+        item.PerDiem+
+        item.Other
+                       )
+        </b>
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+
+<script>
+
+    $('#dt').DataTable({
+        select: true,
+        responsive: true,
+        dom: 'lBfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+
+    function confirm_delete(id) {
+        $.confirm({
+            title: 'Information',
+            type: "red",
+            content: 'Delete this CaseReport?',
+            buttons: {
+                Yes: function () {
+                    window.location = "../CaseReports/DeleteCaseReport/" + id;
+                },
+                No: function () {
+                },
+
+            }
+        });
+
+    }
+
+</script>
